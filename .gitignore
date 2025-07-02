@@ -1,0 +1,5 @@
+server.exe
+# .gitignore
+server.exe
+build/
+*.o
