@@ -1,5 +1,7 @@
-server.exe
-# .gitignore
+# Build artifacts
 server.exe
 build/
 *.o
+
+# VS Code settings
+.vscode/

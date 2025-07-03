@@ -6,33 +6,47 @@
 
 #pragma comment(lib, "ws2_32.lib") // for MSVC, optional for MinGW
 
-void launch(struct Server *server){
+void launch(struct Server *server) {
     char buffer[30000];
-    printf("======WAITING FOR CONNECTION========\n");
 
-    int address_length = sizeof(server->address);
-    SOCKET new_socket = accept(server->socket, (struct sockaddr*)&(server->address), &address_length);
+    printf("====== WAITING FOR CONNECTION ======\n");
 
-    if(new_socket == INVALID_SOCKET){
-        printf("Accept failed with error code: %d\n", WSAGetLastError());
-        return;
+
+    int count = 0;
+    while (1) {
+         int address_length = sizeof(server->address);
+         SOCKET new_socket = accept(server->socket, (struct sockaddr*)&(server->address), &address_length);
+       
+           if (new_socket == INVALID_SOCKET) {
+            printf(" Accept failed with error code: %d\n", WSAGetLastError());
+            continue; // Try next connection instead of exiting
+        }
+         printf("Connection established with client.\n");
+
+        int bytes_received = recv(new_socket, buffer, sizeof(buffer) - 1, 0);
+        if (bytes_received > 0) {
+            buffer[bytes_received] = '\0'; // Null-terminate
+            printf(" Received:\n%s\n", buffer);
+
+            const char *hello =
+                "HTTP/1.1 200 OK\r\n"
+                "Date: Mon, 27 Jul 2009 12:28:53 GMT\r\n"
+                "Server: AtharvaServer/1.0\r\n"
+                "Content-Length: 46\r\n"
+                "Content-Type: text/html\r\n"
+                "Connection: close\r\n"
+                "\r\n"
+                "<html><body><h1>Hello, Atharva</h1></body></html>";
+
+            send(new_socket, hello, (int)strlen(hello), 0);
+        } else {
+            printf("  recv failed or connection closed by client.\n");
+        }
+        
+        closesocket(new_socket);
+        printf("%d Connection closed.\n\n",count);
+        count = count +1;
     }
-
-    recv(new_socket, buffer, sizeof(buffer), 0);
-    printf(">> Received:\n%s\n", buffer);
-
-    const char *hello =
-        "HTTP/1.1 200 OK\r\n"
-        "Date: Mon, 27 Jul 2009 12:28:53 GMT\r\n"
-        "Server: AtharvaServer/1.0\r\n"
-        "Content-Length: 46\r\n"
-        "Content-Type: text/html\r\n"
-        "Connection: close\r\n"
-        "\r\n"
-        "<html><body><h1>Hello, Atharva</h1></body></html>";
-
-    send(new_socket, hello, strlen(hello),0);
-    closesocket(new_socket);
 }
 
 
