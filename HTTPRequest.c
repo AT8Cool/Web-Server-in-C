@@ -44,10 +44,13 @@ int method_select(char *method){
 struct HTTPRequest http_request_constructor(char *request_string){
 
     struct HTTPRequest request;
+    char requested[strlen(request_string)];
+    strcpy(requested,request_string);
 
     for(int i =0; i<= strlen(request_string)-1;i++){
         if(request_string[i] =='\n' && request_string[i+1]=='\n'){
-            request_string[i+1] = '|';
+            printf("a\n");
+            requested[i+1] = '|';
         }
     }
       char *request_line = strtok(request_string,"\n");
