@@ -1,7 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include <stdlib.h>
-#include "Node.h"
+#include "../Common/Node.h"
 #include<stdio.h>
 
 struct LinkedList
@@ -9,7 +9,7 @@ struct LinkedList
     struct Node *head;
     int length;
 
-    void (*insert)( struct LinkedList *linked_list,int index,void* data,int data_type,int size);
+    void (*insert)( struct LinkedList *linked_list,int index,void* data,int size);
     void (*remove)( struct LinkedList *linked_list,int index);
     void *(*retrive)(struct LinkedList *linked_list,int index);
     
