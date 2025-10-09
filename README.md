@@ -15,7 +15,6 @@ This is a HTTP server written in C using Windows sockets (Winsock2). It accepts 
    ```
    pacman -Syu
    pacman -S mingw-w64-x86_64-gcc
-
    ```
 
 3. Clone this repository (if not already):
