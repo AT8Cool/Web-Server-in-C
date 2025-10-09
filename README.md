@@ -14,7 +14,9 @@ This is a HTTP server written in C using Windows sockets (Winsock2). It accepts 
 2. Make sure GCC and required tools are installed:
    ```
    pacman -Syu
-   pacman -S mingw-w64-x86_64-gcc```
+   pacman -S mingw-w64-x86_64-gcc
+
+   ```
 
 3. Clone this repository (if not already):
 
