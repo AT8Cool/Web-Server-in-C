@@ -20,8 +20,9 @@ This is a HTTP server written in C using Windows sockets (Winsock2). It accepts 
 3. Clone this repository (if not already):
 
    ```
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/AT8Cool/Web-Server-in-C.git
+   cd Web-Server-in-C
+
    ```
 4. Compile the server:
 
