@@ -2,7 +2,7 @@
 
 void * search_bst(struct BinarySearchTree *tree, void *data);
 void insert_bst(struct BinarySearchTree *tree, void *data,int size);
-void destory_node_bst(struct Node *node);
+void destroy_node_bst(struct Node *node);
 void recursive_tree_destruction(struct Node *node);
 
 struct Node *create_node_bst(void *data, int size) {
@@ -24,8 +24,8 @@ struct BinarySearchTree binary_search_tree_constructor(int (*compare)(void *data
     return tree;
 };
 
-void binary_search_tree_destructor(struct BinarySearchTree tree){
-recursive_tree_destruction(tree.head);
+void binary_search_tree_destructor(struct BinarySearchTree *tree){
+recursive_tree_destruction(tree->head);
 }
 
 struct Node *iterate(struct BinarySearchTree *tree,struct Node *cursor,void *data, int *direction ){
@@ -55,20 +55,21 @@ struct Node *iterate(struct BinarySearchTree *tree,struct Node *cursor,void *dat
 
 
 void recursive_tree_destruction(struct Node *node){
+    if(!node) return;
     if(node->prev){
         recursive_tree_destruction(node->prev);
     }
     if(node->next){
         recursive_tree_destruction(node->next);
     }
-    destory_node_bst(node);
+    destroy_node_bst(node);
 }
 
 
 void * search_bst(struct BinarySearchTree *tree, void *data){
-    int *direction= NULL;
-    struct Node *cursor = iterate(tree,tree->head,data, direction);
-    if(*direction ==0){
+    int direction = 0;
+    struct Node *cursor = iterate(tree,tree->head,data, &direction);
+    if(direction == 0){
         return cursor->data;
     }else{
         return NULL;
@@ -80,12 +81,12 @@ void insert_bst(struct BinarySearchTree *tree, void *data,int size){
         tree->head = create_node_bst(data,size);
         return;
     }
-    int *direction= NULL;
-    struct Node *cursor = iterate(tree,tree->head,data,direction);
-    if(*direction ==1){
-        cursor->next = create_node(data,size);
-    }else if(*direction==-1){
-        cursor->prev = create_node(data,size);
+    int direction = 0;
+    struct Node *cursor = iterate(tree,tree->head,data,&direction);
+    if(direction == 1){
+        cursor->next = create_node_bst(data,size);
+    }else if(direction == -1){
+        cursor->prev = create_node_bst(data,size);
     }
 
 
@@ -99,8 +100,3 @@ void free_nodes(struct Node *node){
     free_nodes(node->next);
     destroy_node_bst(node);
 }
-
-void binary_search_tree_destructor(struct BinarySearchTree *tree){
-    free(tree->head); 
-    tree->head = NULL;
-};

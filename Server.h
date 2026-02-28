@@ -4,7 +4,7 @@ typedef unsigned long u_long;
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
+// #pragma comment(lib, "ws2_32.lib") // For MSVC only
 
 struct Server {
     int domain;             //  here AF_INET

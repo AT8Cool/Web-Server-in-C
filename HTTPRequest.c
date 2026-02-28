@@ -1,6 +1,6 @@
 #include "HTTPRequest.h"
-#include "../../Data Structures/Lists/Queue.h"
-#include "../../Data Structures/Dictionary/Dictionary.h"
+#include "DataStructures/Lists/Queue.h"
+#include "DataStructures/Dictionary/Dictionary.h"
 
 
 #include<stdio.h>

@@ -1,6 +1,7 @@
 #include "Server.h"
 #include <stdio.h>
 #include<stdlib.h>
+#include <string.h>
 #include <winsock2.h>
 #include<ws2tcpip.h>
 
@@ -18,26 +19,36 @@ struct Server server_constructor(int domain,
         s.port = port;
         s.backlog = backlog;
 
-        s.address.sin_family = domain;
+        /* ensure the address struct is zeroed */
+        memset(&s.address, 0, sizeof(s.address));
 
-        s.address.sin_port = htons(port);
+        s.address.sin_family = (short int)domain;
+        s.address.sin_port = htons((u_short)port);
         s.address.sin_addr.s_addr = htonl(net_interface);
 
         s.socket = socket(domain,service,protocol);
     
         if(s.socket==INVALID_SOCKET){
-            perror("Failed to connect socket ...\n");
+            fprintf(stderr, "Failed to create socket: %d\n", WSAGetLastError());
             exit(1);
-        }
+          }
 
-       if(( bind(s.socket,(struct sockaddr *)&s.address,sizeof(s.address)))<0){
-        perror("Failed to bind socket ...\n");
-        exit(1);
-       }
+            /* allow quick reuse of the address/port when in TIME_WAIT */
+            {
+              int opt = 1;
+              setsockopt(s.socket, SOL_SOCKET, SO_REUSEADDR, (const char *)&opt, sizeof(opt));
+            }
+
+             if(bind(s.socket,(struct sockaddr *)&s.address,sizeof(s.address))==SOCKET_ERROR){
+            fprintf(stderr, "Failed to bind socket: %d\n", WSAGetLastError());
+            closesocket(s.socket);
+            exit(1);
+             }
 
 
-      if((listen(s.socket,s.backlog))<0){
-        perror("Failed to listening...\n");
+      if(listen(s.socket,s.backlog)==SOCKET_ERROR){
+        fprintf(stderr, "Failed to listen: %d\n", WSAGetLastError());
+        closesocket(s.socket);
         exit(1);
       } 
 
@@ -45,4 +56,4 @@ struct Server server_constructor(int domain,
 
         return s;
 
-    };
+    }

@@ -2,8 +2,8 @@
 #ifndef HTTPREQUEST_H
 #define HTTPREQUEST_H
 
-#include "../../Data Structures/Lists/Queue.h"
-
+#include "DataStructures/Lists/Queue.h"
+#include "DataStructures/Dictionary/Dictionary.h"
 // enum HTTPMethod{
 //     GET,
 //     POST,

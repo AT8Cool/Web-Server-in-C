@@ -1,7 +1,8 @@
 #include "Dictionary.h"
+#include<string.h>
 
     void insert(struct Dictionary *dictionary,void *key,int key_size,void *value, int value_size);
-    void search(struct Dictionary *dictionary,void *key);
+    void *search(struct Dictionary *dictionary,void *key, int value_size);
 
 struct Dictionary dictionary_constructor(int (*compare) (void *key_one,void *key_two)){
     struct Dictionary dictionary;
@@ -15,7 +16,7 @@ struct Dictionary dictionary_constructor(int (*compare) (void *key_one,void *key
 };
 
 
-void search(struct Dictionary *dictionary,void *key){
+void *search(struct Dictionary *dictionary,void *key, int value_size){
 
     void *result = dictionary->binary_search_tree
     .search(&dictionary->binary_search_tree,key);
