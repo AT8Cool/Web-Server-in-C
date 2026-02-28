@@ -1,12 +1,13 @@
+# C Web Server with Interactive API
 
-<img width="1189" height="887" alt="image" src="https://github.com/user-attachments/assets/e69e40f4-54e5-4298-bc9e-880621b5d189" />
-<img width="1099" height="752" alt="image" src="https://github.com/user-attachments/assets/b03164ff-fdba-434e-9f65-111eb6ea9160" />
-<img width="1625" height="950" alt="image" src="https://github.com/user-attachments/assets/bfad3446-8116-4599-967c-168dbe025c72" />
+<img width="1158" height="635" alt="image" src="https://github.com/user-attachments/assets/f03b554b-5206-4e00-a85f-fa306b411cec" />
+
 <img width="1050" height="688" alt="image" src="https://github.com/user-attachments/assets/b6ad4122-94e9-453c-a669-4d9a951c3d0f" />
 
+<img width="1200" height="861" alt="image" src="https://github.com/user-attachments/assets/be37d594-6dca-4a6f-99be-29a564d89ae3" />
 
 
-# C Web Server with Interactive API
+
 
 A fully functional HTTP web server written in C using Winsock2. This project demonstrates low-level socket programming, manual HTTP parsing, routing, JSON response building, and integration of custom data structures (Dictionary + Binary Search Tree).
 
