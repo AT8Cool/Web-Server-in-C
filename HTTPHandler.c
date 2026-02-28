@@ -199,16 +199,7 @@ void handle_dashboard(int socket) {
         
         "<h2>Response</h2>"
         "<div class='response' id='response'>Response will appear here...</div>"
-        
-        "<h2>Demo Code Architecture</h2>"
-        "<ul>"
-        "<li><strong>HTTP Parser:</strong> Custom request parser extracts method, path, query string</li>"
-        "<li><strong>Router:</strong> Dispatch requests to appropriate handler functions</li>"
-        "<li><strong>Data Storage:</strong> Binary Search Tree (BST) and Dictionary for O(log n) lookups</li>"
-        "<li><strong>JSON Builder:</strong> Generate responses dynamically</li>"
-        "<li><strong>Multi-Socket Handling:</strong> Handles concurrent client connections</li>"
-        "</ul>"
-        
+
         "</div>"
         
         "<script>"
