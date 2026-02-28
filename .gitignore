@@ -1,7 +1,48 @@
-# Build artifacts
+# Build artifacts & executables
 server.exe
-build/
+testserver.exe
+*.exe
 *.o
+*.out
+*.a
+*.so
+*.dll
 
-# VS Code settings
+# Build directories
+build/
+Debug/
+Release/
+bin/
+obj/
+
+# VS Code
 .vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Backups & temp files
+*_old.*
+*.bak
+*.tmp
+tempCodeRunnerFile.c
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Misc
+.env
+*.log
